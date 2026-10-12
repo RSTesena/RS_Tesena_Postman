@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "b0914a4c-ccdf-47a9-9f2f-39b0e4664b73",
+    "name": "Permissions-sanitized",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5222572"
+  },
+  "item": [
+    {
+      "name": "Create Permission Set work",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "let buttons = [];\r",
+              "for (let i = 3; i <= 100; i++) {\r",
+              "    buttons.push(`Button${i}`);\r",
+              "}\r",
+              "pm.variables.set(\"buttons\", JSON.stringify(buttons));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{authtoken}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"EntityName\": \"Product\",\r\n    \"PermissionConditions\": [\r\n        {\r\n            \"EntityName\": \"Profile\",\r\n            \"Property\": \"Something\",\r\n            \"ComparisonOperator\": \"Equals\",\r\n            \"Value\": \"SomeOtherThing\",\r\n            \"LogicalOperator\": \"And\",\r\n            \"SortOrder\": 6\r\n        }\r\n    ],\r\n    \"PermissionButtonActions\": [\r\n        {\r\n            \"Buttons\": [\"Button1\", \"Button2\"],\r\n            \"ActionType\": \"Hide\",\r\n            \"SortOrder\": 6\r\n        },\r\n        {\r\n            \"Buttons\": {{buttons}},\r\n            \"ActionType\": \"Show\",\r\n            \"SortOrder\": 7\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{applicationurl}}/admin/permissionSet/create",
+          "host": [
+            "{{applicationurl}}"
+          ],
+          "path": [
+            "admin",
+            "permissionSet",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Permission Set do not amend",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{authtoken}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"EntityName\": \"Sinitized\",\r\n    \"PermissionConditions\": [\r\n        {\r\n            \"EntityName\": \"Sinitized\",\r\n            \"Property\": \"CreatedBy\",\r\n            \"ComparisonOperator\": \"Equals\",\r\n            \"Value\": \"userName\",\r\n            \"LogicalOperator\": \"And\",\r\n            \"SortOrder\": 2\r\n        },\r\n        {\r\n            \"EntityName\": \"Profile\",\r\n            \"Property\": \"CreatedBy\",\r\n            \"ComparisonOperator\": \"Equals\",\r\n            \"Value\": \"userName\",\r\n            \"LogicalOperator\": \"And\",\r\n            \"SortOrder\": 6\r\n        }\r\n    ],\r\n    \"PermissionButtonActions\": [\r\n        {\r\n            \"Buttons\": [\"Button1\", \"Button2\"],\r\n            \"ActionType\": \"Hide\",\r\n            \"SortOrder\": 6\r\n        },\r\n        {\r\n            \"Buttons\": [\"Button3\", \"Button4\"],\r\n            \"ActionType\": \"Show\",\r\n            \"SortOrder\": 7\r\n        }\r\n    ],\r\n    \"PermissionPickListActions\": [\r\n        {\r\n            \"PickListId\": \"31835791-1e33-11ed-a1fb-e3098a4f9ba9\",\r\n            \"PickListValueIds\": [\"33602de0-1e33-11ed-a1fb-e3098a4f9ba9\", \"37337d00-1e33-11ed-a1fb-e3098a4f9ba9\"],\r\n            \"ActionType\": \"Allowed\",\r\n            \"SortOrder\": 8\r\n        },\r\n        {\r\n            \"PickListId\": \"3ee10442-ebae-422e-b29c-d242d0772197\",\r\n            \"PickListValueIds\": [\"47447119-d446-4ac2-b217-e79c6da06d6b\", \"2ce2ef94-4dba-428a-80d9-4078888dc48f\"],\r\n            \"ActionType\": \"Restricted\",\r\n            \"SortOrder\": 9\r\n        }\r\n    ],\r\n    \"PermissionPropertyActions\": [\r\n        {\r\n            \"PropertyIds\": [\"0f4820b6-6a83-4326-b4f4-89cae72a617a\", \"156b0530-add3-46cc-b5ea-88230befa193\"],\r\n            \"ActionType\": \"Readonly\",\r\n            \"SortOrder\": 10\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{applicationurl}}/admin/permissionSet/create",
+          "host": [
+            "{{applicationurl}}"
+          ],
+          "path": [
+            "admin",
+            "permissionSet",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Permission Set Create permission without all data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{authtoken}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"EntityName\": \"Sinitized\",\r\n    \"PermissionConditions\": [\r\n        {\r\n            \"EntityName\": \"Sinitized\",\r\n            \"Property\": \"CreatedBy\",\r\n            \"ComparisonOperator\": \"Equals\",\r\n            \"Value\": \"userName\",\r\n            \"LogicalOperator\": \"And\",\r\n            \"SortOrder\": 2\r\n        },\r\n        {\r\n            \"EntityName\": \"Profile\",\r\n            \"Property\": \"CreatedBy\",\r\n            \"ComparisonOperator\": \"Equals\",\r\n            \"Value\": \"userName\",\r\n            \"LogicalOperator\": \"And\",\r\n            \"SortOrder\": 6\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{applicationurl}}/admin/permissionSet/create",
+          "host": [
+            "{{applicationurl}}"
+          ],
+          "path": [
+            "admin",
+            "permissionSet",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Permission Sets",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{authtoken}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n        \"Sinitized-Sinitized-Sinitized-Sinitized-Sinitized\",\r\n        \"Sinitized-Sinitized-Sinitized-Sinitized-Sinitized\"\r\n\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{applicationurl}}/admin/permissionSet/DeletePermissionSets",
+          "host": [
+            "{{applicationurl}}"
+          ],
+          "path": [
+            "admin",
+            "permissionSet",
+            "DeletePermissionSets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Permission Set List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{authtoken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{applicationurl}}/admin/permissionSet/GetList/?skip=0&take=2",
+          "host": [
+            "{{applicationurl}}"
+          ],
+          "path": [
+            "admin",
+            "permissionSet",
+            "GetList",
+            ""
+          ],
+          "query": [
+            {
+              "key": "skip",
+              "value": "0"
+            },
+            {
+              "key": "take",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
